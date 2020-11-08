@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+var mongoose = require("mongoose");
 
 require('dotenv').config();
 
@@ -25,6 +26,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// Configure Mongo DB database via Mongoose
+const dbUrl = process.env.MONGO_DB_URL;
+mongoose.connect(dbUrl, {useNewUrlParser: true, useCreateIndex: true});
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB connection established successfully!");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
