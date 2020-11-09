@@ -29,7 +29,7 @@ app.use('/users', usersRouter);
 
 // Configure Mongo DB database via Mongoose
 const dbUrl = process.env.MONGO_DB_URL;
-mongoose.connect(dbUrl, {useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(dbUrl, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB connection established successfully!");
