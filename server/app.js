@@ -8,7 +8,7 @@ var mongoose = require("mongoose");
 
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
+var logsRouter = require('./routes/logs');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/logs', logsRouter);
 app.use('/users', usersRouter);
 
 // Configure Mongo DB database via Mongoose
